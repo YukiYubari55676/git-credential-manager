@@ -61,7 +61,7 @@ jobs:
         .github/run_developer_signing.sh payload $APPLE_TEAM_ID $GITHUB_WORKSPACE/src/osx/Installer.Mac/entitlements.xml
 
     - name: Upload macOS artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: tmp.${{ matrix.runtime }}-build
         path: |
@@ -123,7 +123,7 @@ jobs:
         Remove-Item signed/payload.zip
 
     - name: Upload signed payload
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.runtime }}-payload-sign
         path: |
@@ -170,7 +170,7 @@ jobs:
          --output=pkg/gcm-${{ matrix.runtime }}-$GitBuildVersionSimple.pkg || exit 1
     
     - name: Upload package
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: tmp.${{ matrix.runtime }}-pack
         path: |
@@ -240,7 +240,7 @@ jobs:
         python .github\run_esrp_signing.py unsigned $env:APPLE_KEY_CODE $env:APPLE_NOTARIZATION_OP_CODE --params 'BundleId' 'com.microsoft.gitcredentialmanager'
     
     - name: Publish signed package
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.runtime }}-sign
         path: signed/*.pkg
@@ -345,7 +345,7 @@ jobs:
           'TimeStamp' '/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256'
     
     - name: Publish final artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: win-sign
         path: |
@@ -382,7 +382,7 @@ jobs:
         mv out/linux/Packaging.Linux/Release/tar/*.tar.gz linux-build/tar
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: tmp.linux-build
         path: |
@@ -425,7 +425,7 @@ jobs:
         python .github/run_esrp_signing.py tar $env:LINUX_KEY_CODE $env:LINUX_OP_CODE
 
     - name: Upload signed tarball and Debian package
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: linux-sign
         path: |
@@ -456,7 +456,7 @@ jobs:
         src/shared/DotnetTool/layout.sh --configuration=Release
 
     - name: Upload .NET tool artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: tmp.dotnet-tool-build
         path: |
@@ -515,7 +515,7 @@ jobs:
         unzip signed/payload.zip -d dotnet-tool-payload-sign
 
     - name: Upload signed payload
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dotnet-tool-payload-sign
         path: |
@@ -551,7 +551,7 @@ jobs:
           --version=$GitBuildVersionSimple --publish-dir=$(pwd)/signed
 
     - name: Upload unsigned package
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: tmp.dotnet-tool-package-unsigned
         path: |
@@ -608,7 +608,7 @@ jobs:
         Remove-Item signed\gcm-nupkg.zip -Force
     
     - name: Publish signed package
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dotnet-tool-sign
         path: signed/*.nupkg
